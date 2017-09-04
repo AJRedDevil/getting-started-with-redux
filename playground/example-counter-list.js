@@ -1,6 +1,5 @@
 var expect = require('expect');
 var deepfreeze = require('deep-freeze');
-var redux = require('redux');
 
 const addCounter = (list) => {
     // return list.concat([0]);
