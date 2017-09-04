@@ -12,7 +12,30 @@ const counter = (state = 0, action) => {
     }
 };
 
-const { createStore } = redux;
+const createStore = (reducer) => {
+    let state;
+    let listeners = [];
+
+    const getState = () => state; // get current state
+
+    const dispatch = (action) => {
+        state = reducer(state, action); // update state as per action
+        listeners.forEach(listener => listener()); // notify listeners
+    };
+
+    const subscribe = (listener) => {
+        listeners.push(listener);
+        return () => {
+            listeners = listeners.filter(l => l !== listener);
+        }; // return function that filters removed listener
+    };
+
+    dispatch({}); // populate initial state
+
+    return { getState, dispatch, subscribe };
+}
+
+// const { createStore } = redux;
 // var createStore = redux.createStore;
 // import { createStore } from 'redux';
 
