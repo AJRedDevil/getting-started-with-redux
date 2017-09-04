@@ -1,4 +1,5 @@
 var expect = require('expect');
+var redux = require('redux');
 
 const counter = (state = 0, action) => {
     switch (action.type) {
@@ -11,30 +12,26 @@ const counter = (state = 0, action) => {
     }
 };
 
-expect(
-    counter(0, { type: 'INCREMENT' })
-).toEqual(1);
+const { createStore } = redux;
+// var createStore = redux.createStore;
+// import { createStore } from 'redux';
 
-expect(
-    counter(1, { type: 'INCREMENT' })
-).toEqual(2);
 
-expect(
-    counter(2, { type: 'DECREMENT' })
-).toEqual(1);
+const store = createStore(counter);
+// 3 methods
+// returns current state
+const render = () => {
+    console.log(store.getState());
+};
+render();
 
-expect(
-    counter(1, { type: 'DECREMENT' })
-).toEqual(0);
+// lets dispatch action
+store.dispatch({ type: 'INCREMENT' });
+render();
 
-// Handle unknown type by returning current state
-expect(
-    counter(1, { type: 'UNKNOWN_TYPE' })
-).toEqual(1);
+// lets to register a callback
+store.subscribe(render);
 
-// Handle initial state when state is undefined
-expect(
-    counter(undefined, {})
-).toEqual(0);
-
-console.log('Tests passed!');
+setInterval(() => {
+    store.dispatch({ type: 'INCREMENT' });
+}, 1000);
