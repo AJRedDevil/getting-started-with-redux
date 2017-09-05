@@ -1,14 +1,14 @@
-const counter = (state = 0, action) => {
-    switch (action.type) {
-        case 'INCREMENT':
-            return state + 1;
-        case 'DECREMENT':
-            return state - 1;
-        default:
-            return state;
-    }
-};
+import { todos, visibilityFilter } from './todo-reducer';
+
+const redux = require('redux');
+
+const { combineReducers } = redux;
+
+const todoApp = combineReducers({
+    todos,
+    visibilityFilter
+});
 
 export {
-    counter
+    todoApp
 }

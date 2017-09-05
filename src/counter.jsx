@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import CounterPresentation from './counter-presentation';
-import { counter } from './redux/reducer';
+import { counter } from './redux/counter-reducer';
 
 var redux = require('redux');
 const { createStore } = redux;

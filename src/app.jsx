@@ -1,12 +1,15 @@
 import React, { Component }  from 'react';
 
-import Counter from './counter';
+import TodoApp from './todo-app';
 
 class App extends Component {
     render() {
         return (
             <div>
-                <Counter />
+                <TodoApp
+                    store={this.props.store}
+                    todos={this.props.store.getState().todos}
+                />
             </div>
         );
     };
