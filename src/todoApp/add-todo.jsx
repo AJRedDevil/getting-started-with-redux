@@ -1,9 +1,10 @@
 import React from 'react';
 
-// AddTodo Functional Component
+let nextTodoId = 0;
+// AddTodo Presentational/Functional Component
 // It doesn't take prop
 const AddTodo = ({
-    onAddClick
+    store
 }) => {
     let input;
     return (
@@ -12,7 +13,11 @@ const AddTodo = ({
                     input = node;
                 }} />
                 <button onClick={() => {
-                    onAddClick(input.value);
+                    store.dispatch({
+                        type: 'ADD_TODO',
+                        id: nextTodoId++,
+                        text: input.value
+                    })
                     input.value = '';
                 }}>
                     Add Todo

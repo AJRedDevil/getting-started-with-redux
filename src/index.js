@@ -11,12 +11,7 @@ const store = createStore(
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
 
-const render = () => {
-    ReactDOM.render(
-        <App store={store} />,
-        document.getElementById('root')
-    )
-};
-
-store.subscribe(render);
-render();
+ReactDOM.render(
+    <App store={store} />,
+    document.getElementById('root')
+);

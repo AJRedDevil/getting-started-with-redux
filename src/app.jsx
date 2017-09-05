@@ -8,7 +8,6 @@ class App extends Component {
             <div>
                 <TodoApp
                     store={this.props.store}
-                    {...this.props.store.getState()}
                 />
             </div>
         );
