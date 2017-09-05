@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import App from './app';
-import { todoApp } from './redux/reducer';
+import { todoApp } from './todoApp/redux/reducer';
 
 const redux = require('redux');
 const { createStore } = redux;
