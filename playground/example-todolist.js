@@ -1,5 +1,6 @@
 var expect = require('expect');
 var deepfreeze = require('deep-freeze');
+var redux = require('redux');
 
 const todo = (state, action) => {
     switch (action.type) {
@@ -49,18 +50,11 @@ const visibilityFilter = (
     }
 };
 
-const todoApp = (state = {}, action) => {
-    return {
-        todos: todos(
-            state.todos,
-            action
-        ),
-        visibilityFilter: visibilityFilter(
-            state.visibilityFilter,
-            action
-        )
-    };
-}
+const { combineReducers } = redux;
+const todoApp = combineReducers({
+    todos,
+    visibilityFilter
+});
 
 const testAddTodo = () => {
     const stateBefore = [];
