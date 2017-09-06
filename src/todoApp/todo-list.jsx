@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React from 'react';
+import { connect } from 'react-redux';
 
 import Todo from './todo';
 
@@ -35,44 +35,37 @@ const getVisibleTodos = (
     }
 };
 
-// VisibleTodoList Container
-class VisibleTodoList extends Component {
-    componentDidMount() {
-        const { store } = this.context;
-        this.unsubscribe = store.subscribe(() =>
-            this.forceUpdate()
-        );
-    }
-
-    componentWillUnmount() {
-        this.unsubscribe();
-    }
-    
-    render() {
-        const { store } = this.context;
-        const state = store.getState();
-
-        return (
-            <TodoList
-                todos={
-                    getVisibleTodos(
-                        state.todos,
-                        state.visibilityFilter
-                    )
-                }
-                onTodoClick={id=>
-                    store.dispatch({
-                        type: 'TOGGLE_TODO',
-                        id
-                    })
-                }
-            />
-        );
-    }
-}
-// ContextTypes for receiving component too
-VisibleTodoList.contextTypes = {
-    store: PropTypes.object
+// maps redux store state to the props of the todo
+const mapStateToProps = (
+    state
+) => {
+    return {
+        todos: getVisibleTodos(
+            state.todos,
+            state.visibilityFilter
+        )
+    };
 };
+
+// maps dispatch method to callback of component
+const mapDispatchToProps = (
+    dispatch
+) => {
+    return {
+        onTodoClick: (id) => {
+            dispatch({
+                type: 'TOGGLE_TODO',
+                id
+            });
+        }
+    };
+};
+
+// connect generates container taking in state returning props and dispatch method to dispatch action
+const VisibleTodoList = connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(TodoList); // correct function pass presentation component that wraps props
+
 
 export default VisibleTodoList;

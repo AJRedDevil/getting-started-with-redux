@@ -1,10 +1,10 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
 let nextTodoId = 0;
 // AddTodo Presentational/Functional Component
 // Receive context as 2nd argument
-const AddTodo = (props, { store }) => {
+let AddTodo = ({ dispatch }) => {
     let input;
     return (
         <div>
@@ -12,7 +12,7 @@ const AddTodo = (props, { store }) => {
                     input = node;
                 }} />
                 <button onClick={() => {
-                    store.dispatch({
+                    dispatch({
                         type: 'ADD_TODO',
                         id: nextTodoId++,
                         text: input.value
@@ -23,9 +23,7 @@ const AddTodo = (props, { store }) => {
                 </button>
         </div>
     );
-}
-AddTodo.contextTypes = {
-    store: PropTypes.object
 };
+AddTodo = connect()(AddTodo); // dispatch injected as a prop if both state and dispatch is null
 
 export default AddTodo;
