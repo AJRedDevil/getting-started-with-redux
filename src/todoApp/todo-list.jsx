@@ -3,6 +3,13 @@ import { connect } from 'react-redux';
 
 import Todo from './todo';
 
+const toggleTodo = (id) => {
+    return {
+        type: 'TOGGLE_TODO',
+        id
+    };
+};
+
 // TodoList Presentation Component
 const TodoList = ({
     todos,
@@ -53,10 +60,7 @@ const mapDispatchToProps = (
 ) => {
     return {
         onTodoClick: (id) => {
-            dispatch({
-                type: 'TOGGLE_TODO',
-                id
-            });
+            dispatch(toggleTodo(id));
         }
     };
 };

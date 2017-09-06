@@ -1,6 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
+const setVisiblityFilter = (filter) => {
+    return {
+        type: 'SET_VISIBILITY_FILTER',
+        filter: filter
+    };
+};
+
 // Link Presentation Component
 const Link = ({
     active,
@@ -37,10 +44,9 @@ const mapDispatchToProps = (
 ) => {
     return {
         onClick: () => {
-            dispatch({
-                type: 'SET_VISIBILITY_FILTER',
-                filter: ownProps.filter
-            });
+            dispatch(
+                setVisiblityFilter(ownProps.filter)
+            );
         }
     };
 };
