@@ -5,20 +5,11 @@ import VisibleTodoList from './todo-list';
 import Footer from './footer';
 
 // TodoApp container app
-const TodoApp = ({
-    store
-}) => (
+const TodoApp = () => (
     <div>
-        {/* AddTodo functional Component */}
-        <AddTodo
-            store={store}
-        />
-        <VisibleTodoList
-            store={store}
-        />
-        <Footer
-            store={store}
-        />
+        <AddTodo />
+        <VisibleTodoList />
+        <Footer />
     </div>
 );
 

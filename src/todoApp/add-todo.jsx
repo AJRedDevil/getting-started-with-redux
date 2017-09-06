@@ -1,11 +1,10 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 let nextTodoId = 0;
 // AddTodo Presentational/Functional Component
-// It doesn't take prop
-const AddTodo = ({
-    store
-}) => {
+// Receive context as 2nd argument
+const AddTodo = (props, { store }) => {
     let input;
     return (
         <div>
@@ -25,5 +24,8 @@ const AddTodo = ({
         </div>
     );
 }
+AddTodo.contextTypes = {
+    store: PropTypes.object
+};
 
 export default AddTodo;
