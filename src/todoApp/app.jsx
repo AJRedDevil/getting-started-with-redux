@@ -1,9 +1,37 @@
 import React, { Component }  from 'react';
 
+import FilterLink from './filterLink';
+
+const getVisibileTodos = (
+    todos,
+    filter
+) => {
+    switch (filter) {
+        case 'SHOW_ALL':
+            return todos;
+        case 'SHOW_COMPLETED':
+            return  todos.filter(
+                t => t.completed
+            );
+        case 'SHOW_ACTIVE':
+            return todos.filter(
+                t => !t.completed
+            );
+    }
+}
+
 let nextTodoId = 0;
 class TodoApp extends Component {c
     render() {
-        const { store } = this.props;
+        const {
+            store,
+            todos,
+            visibilityFilter
+        } = this.props;
+        const visibileTodos = getVisibileTodos(
+            todos,
+            visibilityFilter
+        );
         return (
             <div>
                 <input ref={node => {
@@ -21,7 +49,7 @@ class TodoApp extends Component {c
                 </button>
                 <ul>
                     {
-                        this.props.todos.map(todo =>
+                        visibileTodos.map(todo =>
                             <li
                                 key={todo.id}
                                 onClick={() => {
@@ -41,6 +69,33 @@ class TodoApp extends Component {c
                             </li>
                     )}
                 </ul>
+                <p>
+                    Show:
+                    {' '}
+                    <FilterLink
+                        store={store}
+                        filter='SHOW_ALL'
+                        currentFilter={visibilityFilter}
+                    >
+                        All
+                    </FilterLink>
+                    {' '}
+                    <FilterLink
+                        store={store}
+                        filter='SHOW_ACTIVE'
+                        currentFilter={visibilityFilter}
+                    >
+                        Active
+                    </FilterLink>
+                    {' '}
+                    <FilterLink
+                        store={store}
+                        filter='SHOW_COMPLETED'
+                        currentFilter={visibilityFilter}
+                    >
+                        Completed
+                    </FilterLink>
+                </p>
             </div>
         );
     };

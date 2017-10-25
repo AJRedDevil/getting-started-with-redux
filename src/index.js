@@ -11,7 +11,7 @@ const render = () => {
     ReactDOM.render(
         <TodoApp
             store={store}
-            todos={store.getState().todos}
+            {...store.getState()}
         />,
         document.getElementById('root')
     );
