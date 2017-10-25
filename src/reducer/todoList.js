@@ -27,19 +27,7 @@ export const todos = (state = [], action) => {
                 todo(undefined, action)
             ]
         case 'TOGGLE_TODO':
-<<<<<<< HEAD
             return state.map(t => todo(t, action));
-=======
-            return state.map(todo => {
-                if (todo.id !== action.id) {
-                    return todo;
-                }
-                return {
-                    ...todo,
-                    completed: !todo.completed
-                };
-            });
->>>>>>> 28ca9e0b7e2fd7063097b4e292b700523d45272f
         default:
             return state;
     }
