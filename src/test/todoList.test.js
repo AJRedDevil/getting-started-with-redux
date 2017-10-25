@@ -27,3 +27,44 @@ describe('AddTodo', () => {
         ).toEqual(stateAfter);
     });
 });
+
+
+describe('ToggleTodo', () => {
+    it('should toggle completed', () => {
+        const stateBefore = [
+            {
+                id: 0,
+                text: 'Learn Redux',
+                completed: false
+            },
+            {
+                id: 1,
+                text: 'Take Rest',
+                completed: false
+            }
+        ];
+        const action = {
+            type: 'TOGGLE_TODO',
+            id: 1
+        }
+        const stateAfter = [
+            {
+                id: 0,
+                text: 'Learn Redux',
+                completed: false
+            },
+            {
+                id: 1,
+                text: 'Take Rest',
+                completed: true
+            }
+        ];
+
+        deepfreeze(stateBefore);
+        deepfreeze(action);
+
+        expect(
+            todos(stateBefore, action)
+        ).toEqual(stateAfter);
+    });
+});
