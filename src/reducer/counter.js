@@ -1,5 +1,3 @@
-// import { createStore }  from 'redux';
-
 export const counter = (state = 0, action) => {
     switch (action.type) {
         case 'INCREMENT':
@@ -10,40 +8,3 @@ export const counter = (state = 0, action) => {
             return state;
     }
 }
-
-const createStore = (reducer) => {
-    let state;
-    let listeners = [];
-
-    const getState = () => state;
-
-    const dispatch = (action) => {
-        state = reducer(state, action);
-        listeners.forEach(listener => listener());
-    };
-
-    const subscribe = (listener) => {
-        listeners.push(listener);
-        // unsubscribe listener
-        return () => {
-            listeners = listeners.filter(l => l !== listener);
-        }
-    };
-
-    // when store is returned initial state should be set.
-    dispatch({});
-
-    return { getState, dispatch, subscribe };
-};
-
-const store = createStore(counter);
-
-// UI Update Equivalent
-const render = () => {
-    console.log(store.getState());
-}
-
-store.subscribe(render);
-render();
-
-store.dispatch({ type: 'INCREMENT' });
