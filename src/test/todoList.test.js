@@ -1,7 +1,7 @@
 import deepfreeze from 'deep-freeze';
 import expect from 'expect';
 
-import { todos } from '../reducer/todoList';
+import { todos } from '../reducer/todoApp';
 
 describe('AddTodo', () => {
     it('should add new todo', () => {

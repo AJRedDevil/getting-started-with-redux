@@ -2,25 +2,16 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { createStore } from 'redux';
 
-import Counter from './counter';
-import { counter } from './reducer/counter';
+import TodoApp from './todoApp/app';
+import todos from './reducer/todoApp';
 
-const store = createStore(counter);
+const store = createStore(todos);
 
 const render = () => {
     ReactDOM.render(
-        <Counter
-            value={store.getState()}
-            onIncrement={() =>
-                store.dispatch({
-                    type: 'INCREMENT'
-                })
-            }
-            onDecrement={() =>
-                store.dispatch({
-                    type: 'DECREMENT'
-                })
-            }
+        <TodoApp
+            store={store}
+            todos={store.getState().todos}
         />,
         document.getElementById('root')
     );
