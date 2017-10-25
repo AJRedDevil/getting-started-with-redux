@@ -1,6 +1,7 @@
 import React, { Component }  from 'react';
 
 import FilterLink from './filterLink';
+import TodoList from './todoList';
 
 const getVisibileTodos = (
     todos,
@@ -17,6 +18,8 @@ const getVisibileTodos = (
             return todos.filter(
                 t => !t.completed
             );
+        default:
+            return todos;
     }
 }
 
@@ -47,28 +50,15 @@ class TodoApp extends Component {c
                 }}>
                     Add Todo
                 </button>
-                <ul>
-                    {
-                        visibileTodos.map(todo =>
-                            <li
-                                key={todo.id}
-                                onClick={() => {
-                                    store.dispatch({
-                                        type: 'TOGGLE_TODO',
-                                        id: todo.id
-                                    });
-                                }}
-                                style={{
-                                    textDecoration:
-                                        todo.completed ?
-                                            'line-through' :
-                                            'none'
-                                }}
-                            >
-                                {todo.text}
-                            </li>
-                    )}
-                </ul>
+                <TodoList
+                    todos={visibileTodos}
+                    onTodoClick={id => 
+                        store.dispatch({
+                            type: 'TOGGLE_TODO',
+                            id
+                        })
+                    }
+                />
                 <p>
                     Show:
                     {' '}
