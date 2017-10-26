@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 
 const Link = ({
     active,
-    filter,
     onClick,
     children
 }) => {
@@ -25,7 +24,8 @@ const Link = ({
 
 class FilterLink extends Component {
     componentDidMount() {
-        this.unsubscribe = this.props.store.subscribe(() => 
+        const { store } = this.context;
+        this.unsubscribe = store.subscribe(() => 
             this.forceUpdate()
         );
     }
@@ -36,7 +36,8 @@ class FilterLink extends Component {
 
     render() {
         const props = this.props;
-        const state = props.store.getState();
+        const { store } = this.context;
+        const state = store.getState();
 
         return (
             <Link
@@ -45,7 +46,7 @@ class FilterLink extends Component {
                     state.visibilityFilter
                 }
                 onClick={() => 
-                    props.store.dispatch({
+                    store.dispatch({
                         type: 'SET_VISIBILITY_FILTER',
                         filter: props.filter
                     })
@@ -56,5 +57,8 @@ class FilterLink extends Component {
         );
     }
 }
+FilterLink.contextTypes = {
+    store: React.PropTypes.object
+};
 
 export default FilterLink;

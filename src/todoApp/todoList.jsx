@@ -39,7 +39,8 @@ const getVisibileTodos = (
 
 class VisibleTodoList extends Component {
     componentDidMount() {
-        this.unsubscribe = this.props.store.subscribe(() => 
+        const { store } = this.context;
+        this.unsubscribe = store.subscribe(() => 
             this.forceUpdate()
         );
     }
@@ -50,7 +51,8 @@ class VisibleTodoList extends Component {
 
     render() {
         const props = this.props;
-        const state = props.store.getState();
+        const { store } = this.context;
+        const state = store.getState();
 
         return (
             <TodoList
@@ -61,7 +63,7 @@ class VisibleTodoList extends Component {
                     )
                 }
                 onTodoClick={id =>
-                    props.store.dispatch({
+                    store.dispatch({
                         type: 'TOGGLE_TODO',
                         id
                     })
@@ -70,5 +72,8 @@ class VisibleTodoList extends Component {
         );
     }
 }
+VisibleTodoList.contextTypes = {
+    store: React.PropTypes.object
+};
 
 export default VisibleTodoList;

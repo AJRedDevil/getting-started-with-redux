@@ -1,4 +1,4 @@
-import React, { Component }  from 'react';
+import React  from 'react';
 
 import AddTodo from './addTodo';
 import VisibleTodoList from './todoList';
@@ -8,15 +8,9 @@ const TodoApp = ({
     store
 }) => (
     <div>
-        <AddTodo
-            store={store}
-        />
-        <VisibleTodoList
-            store={store}
-        />
-        <Footer
-            store={store}
-        />
+        <AddTodo />
+        <VisibleTodoList />
+        <Footer />
     </div>
 );
 
