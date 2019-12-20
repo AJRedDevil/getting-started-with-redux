@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import Todo from './todo';
@@ -10,7 +10,6 @@ const toggleTodo = (id) => {
     };
 };
 
-// TodoList Presentation Component
 const TodoList = ({
     todos,
     onTodoClick
@@ -26,7 +25,7 @@ const TodoList = ({
     </ul>
 );
 
-const getVisibleTodos = (
+const getVisibileTodos = (
     todos,
     filter
 ) => {
@@ -34,42 +33,38 @@ const getVisibleTodos = (
         case 'SHOW_ALL':
             return todos;
         case 'SHOW_COMPLETED':
-            return todos.filter(t => t.completed);
+            return  todos.filter(
+                t => t.completed
+            );
         case 'SHOW_ACTIVE':
-            return todos.filter(t => !t.completed);
+            return todos.filter(
+                t => !t.completed
+            );
         default:
             return todos;
     }
-};
+}
 
-// maps redux store state to the props of the todo
-const mapStateToProps = (
-    state
-) => {
+const mapStateToProps = (state) => {
     return {
-        todos: getVisibleTodos(
+        todos: getVisibileTodos(
             state.todos,
             state.visibilityFilter
         )
     };
 };
 
-// maps dispatch method to callback of component
-const mapDispatchToProps = (
-    dispatch
-) => {
+const mapDispatchToProps = (dispatch) => {
     return {
-        onTodoClick: (id) => {
+        onTodoClick: id => {
             dispatch(toggleTodo(id));
         }
     };
 };
 
-// connect generates container taking in state returning props and dispatch method to dispatch action
 const VisibleTodoList = connect(
     mapStateToProps,
     mapDispatchToProps
-)(TodoList); // correct function pass presentation component that wraps props
-
+)(TodoList);
 
 export default VisibleTodoList;

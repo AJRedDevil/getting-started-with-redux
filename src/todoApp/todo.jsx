@@ -1,6 +1,6 @@
 import React from 'react';
 
-// Todo Presentation Component
+// Presentational Component
 const Todo = ({
     onClick,
     completed,
@@ -9,9 +9,12 @@ const Todo = ({
     <li
         onClick={onClick}
         style={{
-            textDecoration: completed ? 'line-through' : 'none'
+            textDecoration:
+                completed ?
+                    'line-through' :
+                    'none'
         }}
-        >
+    >
         {text}
     </li>
 );
